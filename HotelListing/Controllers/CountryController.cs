@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using HotelListing.Data.Entities;
 using HotelListing.Data.IUnit;
 using HotelListing.Data.Models;
 using Microsoft.AspNetCore.Mvc;

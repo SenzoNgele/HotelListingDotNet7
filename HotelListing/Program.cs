@@ -1,7 +1,7 @@
 using HotelListing.Data.Database;
 using HotelListing.Data.IUnit;
+using HotelListing.Data.MapperProfile;
 using HotelListing.Data.Unity;
-using HotelListing.MapperProfile;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Serilog.Events;

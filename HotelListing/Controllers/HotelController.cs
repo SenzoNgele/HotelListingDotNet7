@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using HotelListing.Data.IUnit;
 using HotelListing.Data.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HotelListing.Controllers
