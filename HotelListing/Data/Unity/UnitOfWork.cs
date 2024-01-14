@@ -1,4 +1,5 @@
 ﻿using HotelListing.Data.Database;
+using HotelListing.Data.Entities;
 using HotelListing.Data.IRepository;
 using HotelListing.Data.IUnit;
 using HotelListing.Data.Repository;

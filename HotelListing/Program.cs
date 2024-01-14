@@ -1,4 +1,5 @@
 using HotelListing.Data.Database;
+using HotelListing.MapperProfile;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Serilog.Events;
@@ -12,6 +13,8 @@ builder.Services.AddCors(o => {
         .AllowAnyMethod()
         .AllowAnyHeader());
 });
+
+builder.Services.AddAutoMapper(typeof(MapperInitializer));
 
 // --------------- Configure Serilog -----------------------------------------------------------
 var isDevelopment = builder.Environment.IsDevelopment();
