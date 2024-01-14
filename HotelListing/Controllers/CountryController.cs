@@ -1,4 +1,7 @@
-﻿using HotelListing.Data.IUnit;
+﻿using AutoMapper;
+using HotelListing.Data.Entities;
+using HotelListing.Data.IUnit;
+using HotelListing.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HotelListing.Controllers
@@ -9,11 +12,13 @@ namespace HotelListing.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<CountryController> _logger;
+        private readonly IMapper _mapper;
 
-        public CountryController(IUnitOfWork unitOfWork, ILogger<CountryController> logger)
+        public CountryController(IUnitOfWork unitOfWork, ILogger<CountryController> logger, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _logger = logger;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -22,7 +27,8 @@ namespace HotelListing.Controllers
             try
             {
                 var contries = await _unitOfWork.CountriesRepo.GetAll().ConfigureAwait(false);
-                return Ok(contries);
+                var result = _mapper.Map<IList<CountryDTO>>(contries);
+                return Ok(result);
             }
             catch (Exception exception)
             {
