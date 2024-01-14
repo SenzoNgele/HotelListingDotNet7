@@ -22,6 +22,9 @@ namespace HotelListing.Controllers
         }
 
         [HttpGet]
+        // We let swagger know that the endpoind produces the following status codes
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetHotelsAsync()
         {
             try
@@ -38,6 +41,9 @@ namespace HotelListing.Controllers
         }
 
         [HttpGet("{id:int}")]
+        // We let swagger know that the endpoind produces the following status codes
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetHotelAsync(int id)
         {
             try
