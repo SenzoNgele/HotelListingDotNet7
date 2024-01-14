@@ -1,20 +1,20 @@
 ﻿using AutoMapper;
-using HotelListing.Data.Entities;
 using HotelListing.Data.IUnit;
 using HotelListing.Data.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HotelListing.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CountryController : ControllerBase
+    public class HotelController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly ILogger<CountryController> _logger;
+        private readonly ILogger<HotelController> _logger;
         private readonly IMapper _mapper;
 
-        public CountryController(IUnitOfWork unitOfWork, ILogger<CountryController> logger, IMapper mapper)
+        public HotelController(IUnitOfWork unitOfWork, ILogger<HotelController> logger, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _logger = logger;
@@ -22,33 +22,33 @@ namespace HotelListing.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetCountriesAsync()
+        public async Task<IActionResult> GetHotelsAsync()
         {
             try
             {
-                var contries = await _unitOfWork.CountriesRepo.GetAll().ConfigureAwait(false);
-                var result = _mapper.Map<IList<CountryDTO>>(contries);
+                var hotels = await _unitOfWork.HotelsRepo.GetAll().ConfigureAwait(false);
+                var result = _mapper.Map<IList<HotelDTO>>(hotels);
                 return Ok(result);
             }
             catch (Exception exception)
             {
-                _logger.LogError(exception, $"Something went wrong in the {nameof(GetCountriesAsync)}");
+                _logger.LogError(exception, $"Something went wrong in the {nameof(GetHotelsAsync)}");
                 return StatusCode(500, "Internal Server Error. Please Try Again Later");
             }
         }
 
         [HttpGet("{id:int}")]
-        public async Task<IActionResult> GetCountryAsync(int id)
+        public async Task<IActionResult> GetHotelAsync(int id)
         {
             try
             {
-                var contry = await _unitOfWork.CountriesRepo.Get(q => q.Id == id, new List<string> { "Hotels" }).ConfigureAwait(false);
-                var result = _mapper.Map<CountryDTO>(contry);
+                var hotel = await _unitOfWork.HotelsRepo.Get(q => q.Id == id, new List<string> { "Country" }).ConfigureAwait(false);
+                var result = _mapper.Map<HotelDTO>(hotel);
                 return Ok(result);
             }
             catch (Exception exception)
             {
-                _logger.LogError(exception, $"Something went wrong in the {nameof(GetCountryAsync)}");
+                _logger.LogError(exception, $"Something went wrong in the {nameof(GetHotelAsync)}");
                 return StatusCode(500, "Internal Server Error. Please Try Again Later");
             }
         }
