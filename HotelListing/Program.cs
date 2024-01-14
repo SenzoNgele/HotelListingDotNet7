@@ -1,4 +1,6 @@
 using HotelListing.Data.Database;
+using HotelListing.Data.IUnit;
+using HotelListing.Data.Unity;
 using HotelListing.MapperProfile;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
@@ -15,6 +17,7 @@ builder.Services.AddCors(o => {
 });
 
 builder.Services.AddAutoMapper(typeof(MapperInitializer));
+builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 
 // --------------- Configure Serilog -----------------------------------------------------------
 var isDevelopment = builder.Environment.IsDevelopment();
