@@ -2,6 +2,7 @@ using HotelListing.Data.Database;
 using HotelListing.Data.IUnit;
 using HotelListing.Data.MapperProfile;
 using HotelListing.Data.Unity;
+using HotelListing.ServiceExtensions;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Serilog.Events;
@@ -37,6 +38,8 @@ builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnC
 builder.Services.AddDbContext<DatabaseContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection"))
 );
+builder.Services.AddAuthentication();
+builder.Services.ConfigureIdentity();
 
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
     options.SerializerSettings.ReferenceLoopHandling = 
